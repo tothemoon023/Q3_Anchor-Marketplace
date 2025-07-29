@@ -5,21 +5,15 @@ package_manager = "yarn"
 resolution = true
 skip-lint = false
 
-[programs.localnet]
-marketplace = "HYxi42pNZDn3dpnF8HPNeFurSLQSpcYWdvRSkfuqkkui"
+[programs.devnet]
+marketplace = "Ho3jBBGmZntNnvaYcsM6AbyjDbTKzrC6eK4vfRxyoBHS"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
-[test.validator]
-url = "https://api.mainnet-beta.solana.com"
-
-[[test.validator.clone]]
-address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"

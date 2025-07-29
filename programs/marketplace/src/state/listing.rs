@@ -1,20 +1,10 @@
-use anchor_lang::prelude::*;
+use anchor_lang::prelude::*; // Import essential Anchor framework components
 
-#[account]
-pub struct Listing{
-    pub maker: Pubkey, // The wallet address of the seller who created this listing
-    pub maker_mint: Pubkey, // The mint address of the NFT being sold
-    pub price: u64, // The selling price in lamports (SOL's smallest unit)
-    pub bump: u8,
-}
-
-// Implementation of the Space trait to define storage requirements
-impl Space for Listing {
-    /// Calculate the exact space needed for this account:
-    /// - 8 bytes: Account discriminator (automatically added by Anchor)
-    /// - 32 bytes: Pubkey for maker
-    /// - 32 bytes: Pubkey for maker_mint
-    /// - 8 bytes: u64 for price
-    /// - 1 byte: u8 for bump
-    const INIT_SPACE: usize = 8 + 32 + 32 + 8 + 1;
+#[account] // Tell Anchor this is an account that can be serialized/deserialized
+#[derive(InitSpace)] // Automatically calculate space needed for this struct
+pub struct Listing {
+    pub maker: Pubkey,         // Public key of NFT seller (32 bytes)
+    pub maker_mint: Pubkey,           // Public key of NFT mint being sold (32 bytes)
+    pub price: u64,             // Sale price in lamports (8 bytes)
+    pub bump: u8               // Canonical bump seed for listing PDA (1 byte)
 }
